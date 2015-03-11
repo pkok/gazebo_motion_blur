@@ -10,11 +10,10 @@ if (PKG_CONFIG_FOUND)
   pkg_check_modules(GAZEBO gazebo)
 endif()
 
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
+
 include_directories(${GAZEBO_INCLUDE_DIRS})
 include_directories(${OGRE_INCLUDE_DIR} ${OGRE_Paging_INCLUDE_DIR})
-#include_directories(/usr/include/gazebo-5.0/gazebo)
-#include_directories(/usr/include/OGRE)
-#include_directories(/usr/include/OGRE/Paging)
 link_directories(${GAZEBO_LIBRARY_DIRS})
 
 add_library(motion_blur SHARED motion_blur.cc)

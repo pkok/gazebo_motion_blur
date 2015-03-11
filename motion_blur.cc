@@ -83,8 +83,7 @@ namespace gazebo
 
     public: CameraBlur() 
             : CameraPlugin(), 
-              history_size(1),
-              previousFrames(2)
+              history_size(1)
     {}
 
     public: void Load(sensors::SensorPtr _parent, sdf::ElementPtr _sdf)
@@ -94,8 +93,7 @@ namespace gazebo
       CameraPlugin::Load(_parent, _sdf);
 
       if (_sdf->HasElement("history_size")) {
-        _sdf->GetElement("history_size")->GetValue()->Get<int>(this->history_size);
-        this->previousFrames = image_history_t(this->history_size + 1);
+        this->history_size = std::stoi(_sdf->GetElement("history_size")->GetValue()->GetAsString());
       }
     }
 
@@ -122,9 +120,9 @@ namespace gazebo
         this->previousFrames.back()[i] = _image[i];
       }
 
-      for (auto frame : this->previousFrames) {
+      for (const std::vector<unsigned char>& frame : this->previousFrames) {
         for (unsigned int i = 0; i < image_size; ++i) {
-          summedFrame[i] += frame[i];
+          summedFrame[i] += (unsigned int) frame[i];
         }
       }
 
