@@ -23,58 +23,6 @@
 
 #include <iostream>
 
-//#include <chrono>
-//#include <regex>
-//
-///** Parse a string to its corresponding std::chrono::duration representation.
-// *
-// * Strings can contain numbers followed by:
-// * - h for hours
-// * - m or min for minutes
-// * - s for seconds
-// * - ms for milliseconds
-// * - us for microseconds
-// * - ns for nanoseconds
-// * The order of magnitudes should be h, m, s, ms, us, ns.
-// * 
-// * If an invalid string is passed, a duration of 0 ns is returned.
-// */
-//std::chrono::nanoseconds parse_duration(const std::string &txt_duration) {
-//  std::chrono::nanoseconds duration;
-//  const std::string time_pattern = " *"
-//    "((\\d+) *h)? *"
-//    "((\\d+) *m(in)?)? *"
-//    "((\\d+) *s)? *"
-//    "((\\d+) *ms)? *"
-//    "((\\d+) *([^m]|[^n])s)? *"
-//    "((\\d+) *ns)? *";
-//  const std::regex time_regex(time_pattern, std::regex::icase);
-//
-//  std::smatch match;
-//  std::regex_search(txt_duration, match, time_regex);
-//
-//  if (match[2].length())
-//    duration += std::chrono::hours(std::stoi(match[2]));
-//
-//  if (match[4].length())
-//    duration += std::chrono::minutes(std::stoi(match[4]));
-//
-//  if (match[7].length())
-//    duration += std::chrono::seconds(std::stoi(match[7]));
-//
-//  if (match[9].length())
-//    duration += std::chrono::milliseconds(std::stoi(match[9]));
-//
-//  if (match[11].length())
-//    duration += std::chrono::microseconds(std::stoi(match[11]));
-//
-//  if (match[14].length())
-//    duration += std::chrono::nanoseconds(std::stoi(match[14]));
-//
-//  return duration;
-//}
-
-
 namespace gazebo
 {
   class CameraBlur : public CameraPlugin
