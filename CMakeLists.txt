@@ -18,3 +18,6 @@ link_directories(${GAZEBO_LIBRARY_DIRS})
 
 add_library(motion_blur SHARED motion_blur.cc)
 target_link_libraries(motion_blur ${GAZEBO_libraries} CameraPlugin)
+
+add_library(camera_move SHARED camera_move.cc)
+target_link_libraries(camera_move ${GAZEBO_libraries})
