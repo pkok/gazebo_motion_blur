@@ -63,22 +63,28 @@ namespace gazebo
       std::vector<unsigned int> summedFrame(image_size);
       unsigned char* blurredImage = const_cast<unsigned char*>(_image);
 
+      // First, copy the current frame to the buffer.
       this->previousFrames.emplace_back(image_size);
+      auto& this_frame = this->previousFrames.back();
 
       for (unsigned int i = 0; i < image_size; ++i) {
-        this->previousFrames.back()[i] = _image[i];
+        this_frame[i] = _image[i];
       }
 
+      // Then, add all frames together in the new output frame.
       for (const std::vector<unsigned char>& frame : this->previousFrames) {
         for (unsigned int i = 0; i < image_size; ++i) {
           summedFrame[i] += (unsigned int) frame[i];
         }
       }
 
+      // Finally, normalize pixel values back to the value range of chars.
+      const image_history_t::size_type frame_count = this->previousFrames.size();
       for (unsigned int i = 0; i < image_size; ++i) {
-        blurredImage[i] = summedFrame[i] / this->previousFrames.size();
+        blurredImage[i] = summedFrame[i] / frame_count;
       }
 
+      // Don't let the history buffer grow.
       if (this->previousFrames.size() > this->history_size) {
         this->previousFrames.pop_front();
       }
